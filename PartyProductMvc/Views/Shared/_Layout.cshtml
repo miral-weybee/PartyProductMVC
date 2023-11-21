@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Party Product @ViewBag.Title </title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+  
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Party", "PartyList", "Party")</li>
+                    <li>@Html.ActionLink("Products", "ProductList", "Product")</li>
+                    <li>@Html.ActionLink("Assign Party", "AssignPartyList", "AssignParty")</li>
+                    <li>@Html.ActionLink("Product Rate", "ProductRateList", "ProductRate")</li>
+                    <li>@Html.ActionLink("Invoice", "InvoiceAdd", "Invoice")</li>
+                    <li id="logoutbtn">@Html.ActionLink("Logout","Index","Home")</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+    <script>
+        // Access session data on the client side
+        var sessionValue = '@Session["Id"]';
+
+        // Now, you can use sessionValue in your JavaScript code
+        if (sessionValue.length == 0) {
+            document.getElementById("logoutbtn").style.display = "none";
+        } else {
+            document.getElementById("logoutbtn").style.display = "block";
+        }
+    </script>
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>

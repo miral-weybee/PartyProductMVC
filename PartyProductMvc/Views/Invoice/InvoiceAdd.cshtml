@@ -1,0 +1,145 @@
+﻿@model PartyProductMvc.Models.Invoice
+
+@{
+    ViewBag.Title = "InvoiceAdd";
+}
+
+<h2>InvoiceAdd</h2>
+
+
+@using (Html.BeginForm("SaveInvoice", "Invoice"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Invoice</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Party.PartyName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Party.PartyName, new SelectList(ViewBag.partyList, "PartyId", "PartyName"), "Select Party", new { id = "partyDropdown" })
+                @Html.ValidationMessageFor(model => model.Party.PartyName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Product.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Product.ProductName, new SelectList(""), "Select Product")
+                @Html.ValidationMessageFor(model => model.Product.ProductName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CurrentRate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CurrentRate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CurrentRate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Add To Invoice" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="dataTable_wrapper"></div>
+        <table id="dataTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Party</th>
+                    <th>Product</th>
+                    <th>Rate Of Product</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+    <div class="container">
+        <div>
+            <label class=" col-md-offset-10 col-md-10">Grand Total: @ViewBag.GrandTotal</label>
+        </div>
+    </div>
+
+
+
+}
+
+@using (Html.BeginForm("DeleteInvoice", "Invoice"))
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="col-md-offset-10 col-md-10">
+            <input type="submit" value="Close Invoice" class="btn btn-danger"/>
+        </div>
+    </div>
+}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script>
+            $(document).ready(function () {
+                $("#partyDropdown").change(function () {
+                    $.get("/Invoice/GetProductList", { partyId: $("#partyDropdown").val() }, function (data) {
+                        $("#Product_ProductName").empty();
+                        $('#Product_ProductName').append("<option value='" + 0 + "'>" + "Select Product" + "</option>")
+                        for (let i = 0; i < data.length; i++) {
+                            $('#Product_ProductName').append("<option value='" + data[i].ProductId + "'>" + data[i].ProductName + "</option>")
+                        }
+                    })
+                    $("#Product_ProductName").change(function () {
+                        $.get("/Invoice/GetProductRate", { productId: $("#Product_ProductName").val() }, function (data) {
+                            $("#CurrentRate").val(data[data.length - 1])
+                        })
+                    })
+                })
+                let table = new DataTable('#dataTable', {
+                    ajax: {
+                        "url": "/Invoice/GetInvoice",
+                        "type": "GET",
+                        "datatype": "json"
+                    },
+                    columns: [
+                        { "data": "Id" },
+                        { "data": "Party.PartyName" },
+                        { "data": "Product.ProductName" },
+                        { "data": "CurrentRate" },
+                        { "data": "Quantity" },
+                        {
+                            "data": null,
+                            render: function (data) {
+                                var total = data.Quantity * data.CurrentRate;
+                                return total.toFixed(2);
+                            }
+                        }]
+                });
+            })
+        </script>
+
+    }

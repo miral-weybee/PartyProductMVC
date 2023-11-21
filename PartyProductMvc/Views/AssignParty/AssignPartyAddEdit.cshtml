@@ -1,0 +1,35 @@
+﻿@model PartyProductMvc.Models.AssignParty
+
+@{
+    ViewBag.Title = "AssignPartyAddEdit";
+}
+
+<h2>AssignPartyAddEdit</h2>
+
+
+@using (Html.BeginForm("SaveAssign","AssignParty")) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>AssignParty</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.HiddenFor(i => i.AssignPartyId)
+                @Html.DropDownListFor(m => m.Party.PartyName, new SelectList(ViewBag.partyList, "PartyId", "PartyName"), "Select Party")
+                @Html.DropDownListFor(m => m.Product.ProductName, new SelectList(ViewBag.productList, "ProductId", "ProductName"), "Select Product")
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "AssignPartyList")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

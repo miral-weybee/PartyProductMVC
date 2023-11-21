@@ -1,0 +1,47 @@
+﻿@model IEnumerable<PartyProductMvc.Models.AssignParty>
+
+@{
+    ViewBag.Title = "AssignPartyList";
+}
+
+<h2>AssignPartyList</h2>
+
+<p>
+    @Html.ActionLink("Add New Assign Party", "AssignPartyAddEdit")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AssignPartyId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Party.PartyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.ProductName)
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.AssignPartyId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Party.PartyName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Product.ProductName)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.AssignPartyId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.AssignPartyId })
+    </td>
+</tr>
+    }
+
+</table>
