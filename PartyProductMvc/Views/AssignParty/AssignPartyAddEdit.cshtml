@@ -18,8 +18,8 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 @Html.HiddenFor(i => i.AssignPartyId)
-                @Html.DropDownListFor(m => m.Party.PartyName, new SelectList(ViewBag.partyList, "PartyId", "PartyName"), "Select Party")
-                @Html.DropDownListFor(m => m.Product.ProductName, new SelectList(ViewBag.productList, "ProductId", "ProductName"), "Select Product")
+                @Html.DropDownListFor(m => m.PartyId, new SelectList(ViewBag.partyList, "PartyId", "PartyName"), "Select Party")
+                @Html.DropDownListFor(m => m.ProductId, new SelectList(ViewBag.productList, "ProductId", "ProductName"), "Select Product")
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>

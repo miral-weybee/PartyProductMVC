@@ -45,10 +45,10 @@ namespace PartyProductMvc.Controllers
                 return HttpNotFound();
             if (assignParty.AssignPartyId == 0)
             {
-                var paid = Convert.ToInt32(assignParty.Party.PartyName);
-                var prid = Convert.ToInt32(assignParty.Product.ProductName);
-                var party = db.Parties.Single(e => e.PartyId == paid);
-                var product = db.Products.Single(e => e.ProductId == prid);
+                int partyId = assignParty.PartyId;
+                int productId = assignParty.ProductId;
+                var party = db.Parties.Single(e => e.PartyId == partyId);
+                var product = db.Products.Single(e => e.ProductId == productId);
                 db.AssignParties.Add(new AssignParty() { Party = party, Product = product });
             }
             else
@@ -57,10 +57,10 @@ namespace PartyProductMvc.Controllers
                 if (assignFromDb == null)
                     return HttpNotFound();
 
-                var paid = Convert.ToInt32(assignParty.Party.PartyName);
-                var prid = Convert.ToInt32(assignParty.Product.ProductName);
-                var party = db.Parties.Single(e => e.PartyId == paid);
-                var product = db.Products.Single(e => e.ProductId == prid);
+                var partyId = assignParty.PartyId;
+                var productId = assignParty.ProductId;
+                var party = db.Parties.Single(e => e.PartyId == partyId);
+                var product = db.Products.Single(e => e.ProductId == productId);
 
                 assignFromDb.Party = party;
                 assignFromDb.Product = product;

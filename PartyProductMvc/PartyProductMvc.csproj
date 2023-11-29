@@ -216,6 +216,10 @@
     <Compile Include="Migrations\202311290512254_changes2.Designer.cs">
       <DependentUpon>202311290512254_changes2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202311290528464_assignpartychanges.cs" />
+    <Compile Include="Migrations\202311290528464_assignpartychanges.Designer.cs">
+      <DependentUpon>202311290528464_assignpartychanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AssignParty.cs" />
     <Compile Include="Models\Invoice.cs" />
@@ -351,6 +355,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202311290512254_changes2.resx">
       <DependentUpon>202311290512254_changes2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202311290528464_assignpartychanges.resx">
+      <DependentUpon>202311290528464_assignpartychanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

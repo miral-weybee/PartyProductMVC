@@ -13,11 +13,16 @@ namespace PartyProductMvc.Models
         [Key]
         [DisplayName("#")]
         public int AssignPartyId { get; set; }
+
+        public int PartyId { get; set; }
+
+        public int ProductId { get; set; }
+
         [DisplayName("Party Name")]
-        [Required]
+        
         public Party Party { get; set; }
         [DisplayName("Product Name")]
-        [Required]
+        
         public Product Product { get; set; }
     }
 }
