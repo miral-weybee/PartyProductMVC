@@ -14,7 +14,6 @@ namespace PartyProductMvc.Models
         public int PartyId { get; set; }
 
         [Required(ErrorMessage = "Party Name is required..")]
-        [DisplayName("Party Name")]
         public string PartyName { get; set; }
 
     }

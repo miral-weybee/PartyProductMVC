@@ -56,13 +56,13 @@ namespace PartyProductMvc.Controllers
             if (!ModelState.IsValid)
                 return HttpNotFound();
 
-            var productId = Convert.ToInt32(invoice.Product.ProductName);
-            var partyId = Convert.ToInt32(invoice.Party.PartyName);
+            int productId = invoice.ProductId;
+            int partyId = invoice.PartyId;
             var product = db.Products.Single(e => e.ProductId == productId);
             var party = db.Parties.Single(e => e.PartyId == partyId);
             db.Invoices.Add(new Invoice()
             {
-                Product = product, Party = party, CurrentRate = invoice.CurrentRate,Quantity = invoice.Quantity
+                ProductId = productId, PartyId = partyId, CurrentRate = invoice.CurrentRate,Quantity = invoice.Quantity
             });
 
             db.SaveChanges();

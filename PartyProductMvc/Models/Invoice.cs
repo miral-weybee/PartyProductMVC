@@ -11,13 +11,9 @@ namespace PartyProductMvc.Models
     {
         public int Id { get; set; }
 
-        [Required]
-        [DisplayName("Party Name")]
-        public Party Party { get; set; }
+        public int PartyId { get; set; }
 
-        [Required]
-        [DisplayName("Product Name")]
-        public Product Product { get; set; }
+        public int ProductId { get; set; }
 
         [Required]
         [DisplayName("Current Rate")]
@@ -26,5 +22,9 @@ namespace PartyProductMvc.Models
         [Required]
         [DisplayName("Quantity")]
         public int Quantity { get; set; }
+
+        public Party Party { get; set; }
+
+        public Product Product { get; set; }
     }
 }

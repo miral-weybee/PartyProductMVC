@@ -19,7 +19,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Party.PartyName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Party.PartyName, new SelectList(ViewBag.partyList, "PartyId", "PartyName"), "Select Party", new { id = "partyDropdown" })
+                @Html.DropDownListFor(m => m.PartyId, new SelectList(ViewBag.partyList, "PartyId", "PartyName"), "Select Party", new { id = "partyDropdown" })
                 @Html.ValidationMessageFor(model => model.Party.PartyName, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -27,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Product.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Product.ProductName, new SelectList(""), "Select Product")
+                @Html.DropDownListFor(m => m.ProductId, new SelectList(""), "Select Product")
                 @Html.ValidationMessageFor(model => model.Product.ProductName, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -107,14 +107,14 @@
             $(document).ready(function () {
                 $("#partyDropdown").change(function () {
                     $.get("/Invoice/GetProductList", { partyId: $("#partyDropdown").val() }, function (data) {
-                        $("#Product_ProductName").empty();
-                        $('#Product_ProductName').append("<option value='" + 0 + "'>" + "Select Product" + "</option>")
+                        $("#ProductId").empty();
+                        $('#ProductId').append("<option value='" + 0 + "'>" + "Select Product" + "</option>")
                         for (let i = 0; i < data.length; i++) {
-                            $('#Product_ProductName').append("<option value='" + data[i].ProductId + "'>" + data[i].ProductName + "</option>")
+                            $('#ProductId').append("<option value='" + data[i].ProductId + "'>" + data[i].ProductName + "</option>")
                         }
                     })
                     $("#Product_ProductName").change(function () {
-                        $.get("/Invoice/GetProductRate", { productId: $("#Product_ProductName").val() }, function (data) {
+                        $.get("/Invoice/GetProductRate", { productId: $("#ProductId").val() }, function (data) {
                             $("#CurrentRate").val(data[data.length - 1])
                         })
                     })

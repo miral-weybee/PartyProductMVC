@@ -204,6 +204,18 @@
     <Compile Include="Migrations\202311211035360_usertable.Designer.cs">
       <DependentUpon>202311211035360_usertable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202311290508400_changes.cs" />
+    <Compile Include="Migrations\202311290508400_changes.Designer.cs">
+      <DependentUpon>202311290508400_changes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202311290511427_changes1.cs" />
+    <Compile Include="Migrations\202311290511427_changes1.Designer.cs">
+      <DependentUpon>202311290511427_changes1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202311290512254_changes2.cs" />
+    <Compile Include="Migrations\202311290512254_changes2.Designer.cs">
+      <DependentUpon>202311290512254_changes2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AssignParty.cs" />
     <Compile Include="Models\Invoice.cs" />
@@ -330,6 +342,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202311211035360_usertable.resx">
       <DependentUpon>202311211035360_usertable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202311290508400_changes.resx">
+      <DependentUpon>202311290508400_changes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202311290511427_changes1.resx">
+      <DependentUpon>202311290511427_changes1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202311290512254_changes2.resx">
+      <DependentUpon>202311290512254_changes2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
